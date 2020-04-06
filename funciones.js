@@ -146,3 +146,16 @@ function irPagina() {
         xmlhttp.send();
     }
 }
+
+function buscarPorID(id) {
+    data.Search.forEach(movieB => {
+        if (movieB.imdbID == id) {
+            DataFullMuvies(id);
+        }
+    });
+    overlay = document.getElementById('overlay');
+    popup = document.getElementById('popup');
+    overlay.classList.add('active');
+    popup.classList.add('active');
+}
+
