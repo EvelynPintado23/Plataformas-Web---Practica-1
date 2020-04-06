@@ -159,3 +159,21 @@ function buscarPorID(id) {
     popup.classList.add('active');
 }
 
+function cerrarPopup() {
+    document.getElementById("texto1").innerHTML = "";
+    document.getElementById("portada").innerHTML = "";
+    document.getElementById("anioM").innerHTML = "";
+    document.getElementById("nomimaM").innerHTML = "";
+    document.getElementById("estrenoM").innerHTML = "";
+    document.getElementById("duracionM").innerHTML = "";
+    document.getElementById("generoM").innerHTML = "";
+    document.getElementById("directorM").innerHTML = "";
+    document.getElementById("resumenM").innerHTML = "";
+    overlay = document.getElementById('overlay');
+    popup = document.getElementById('popup');
+    overlay.classList.remove('active');
+    popup.classList.remove('active');
+}
+
+
+
