@@ -5,10 +5,33 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Pagina Inicio</title>
-        
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600|Open+Sans" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+        <link rel="stylesheet" href="style.css">
         <script type="text/javascript" src ="funcion.js"></script>
     </head>
     <body>
+        <div class = "ui main text container segment" id="container" >
+            <div class="ui huge header" id="TituloPagina">
+                Buscar Pelicula
+            </div>
+            <form class="ui huge form" action="/results">
+                <div class="field">
+                    <label id="Subtitulo">Nombre Pelicula</label>
+                    <div class="ui icon imput">
+                        <input type="text" id="nombreMovie" name="movieName" placeholder="Inserte el nombre de la pelicula..." autocomplete="off" autofocus>
+                        <i class="search icon"></i>
+                    </div>
+                </div>
+                <input id="botonBuscar" type="button" value="Buscar" onclick="listarPeliculas()">
+            </form>
+        </div>
+       
+        
+        
+        
+        
         <input type="button" id="nombreMovie" name="movieName" autocomplete="off" autofocus>
         <table id="tablaDatosPeliculas" class="data">
             <thead>

@@ -186,3 +186,28 @@ function anteriorPagina() {
     numPagina = numPagina - 1;
     paginar(numPagina);
 }
+
+function desactivar() {
+    var vacio = " ";
+    document.getElementById("numPagAct").innerHTML = vacio;
+    document.getElementById("numPagActPie").innerHTML = vacio;
+    var botonAtras = document.getElementById("atrasbtn");
+    var botonSiguiente = document.getElementById("siguientebtn");
+    document.getElementById("numPagAct").innerHTML = numPagina;
+    document.getElementById("numPagActPie").innerHTML = numPagina;
+    botonSiguiente.disabled = false;
+    if (numPagina == 1) {
+        botonAtras.disabled = true;
+    } else {
+        botonAtras.disabled = false;
+    } 
+    if (numPagina < totalResult) {
+        botonSiguiente.disabled = false;
+    } else if (numPagina == totalResult) {
+        botonSiguiente.disabled = true;
+    }
+    if (totalResult == 0) {
+        botonSiguiente.disabled = true;
+        botonAtras.disabled = true;
+    }
+}
