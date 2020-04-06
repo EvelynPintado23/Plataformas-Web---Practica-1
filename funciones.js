@@ -37,7 +37,25 @@ function listarPeliculas(){
                     document.getElementById("totalPaginasMost").innerHTML = totalResult;
                     document.getElementById("totalPaginasMostPie").innerHTML = totalResult;
                 }
+                desactivar();
+                data.Search.forEach(movie =>{
+                    var imagen = movie.Poster;
+                    if (imagen == "N/A"){
+                        imagen = "sinImagen.jpg";
+                    }
+                    detalles += "<tr>" +
+                        "<td><a href='#'  style='text-decoration:none'     onclick=\"buscarPorID('" + movie.imdbID + "')\">'<i class='fa fa-eye'></i>'</a>" +
+                        "<td>" + movie.Title + "</td>" +
+                        "<td>" + movie.Year + "</td>" +
+                        "<td>" + movie.Type + "</td>" +
+                        "<td><img src=" + imagen + "></td" +
+                        "</tr>";
+                });
+                document.getElementById("tablaDetallesPeliculas").innerHTML = detalles;
             }
-        }
+        };
+        xmlhttp.open("GET", "https://www.omdbapi.com/?apikey=2a0107e8=" + titulo + "&plot=full", true);
+        xmlhttp.send();
     }
 }
+
