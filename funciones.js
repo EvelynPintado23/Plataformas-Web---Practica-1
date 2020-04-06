@@ -24,5 +24,20 @@ function listarPeliculas(){
         }else{
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                data = JSON.parse(this.responseText)
+                console.log(Math.round((data.totalResults) / 10));
+                totalResult = Math.round((data.totalResults) / 10);
+                document.getElementById("totalResults").innerHTML = data.totalResults;
+                if (totalResult == 0){
+                    document.getElementById("totalPaginasMost").innerHTML = 1;
+                    document.getElementById("totalPaginasMostPie").innerHTML = 1;
+                } else {
+                    document.getElementById("totalPaginasMost").innerHTML = totalResult;
+                    document.getElementById("totalPaginasMostPie").innerHTML = totalResult;
+                }
+            }
+        }
     }
 }
