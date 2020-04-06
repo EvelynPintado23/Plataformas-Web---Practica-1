@@ -103,3 +103,46 @@ function paginar(numPaginaAct) {
         xmlhttp.send();
     }
 }
+
+function irPagina() {
+    var numPaginaAct = document.getElementById("numPagBusc").value;
+    var titulo = document.getElementById("nombreMovie").value;
+    var detalles = "";
+    if (numPaginaAct > totalResult) {
+        detalles = "<tr>" +
+            "<td colspan='5'>Numero de pagina fuera de limite..</td>" +
+            "</tr>";
+        document.getElementById("tablaDetallesPeliculas").innerHTML = detalles;
+        document.getElementById("numPagAct").innerHTML = "---";
+    } else {
+        if (window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                data = JSON.parse(this.responseText)
+                numPagina = 0;
+                numPagina = parseInt(numPaginaAct);
+                desactivar();
+                data.Search.forEach(movie => {
+                    var imagen = movie.Poster;
+                    if (imagen == "N/A") {
+                        imagen = "sinImagen.jpg";
+                    }
+                    detalles += "<tr>" +
+                        "<td><a href='#'  style='text-decoration:none'     onclick=\"buscarPorID('" + movie.imdbID + "')\">'<i class='fa fa-eye'></i>'</a>" +
+                        "<td>" + movie.Title + "</td>" +
+                        "<td>" + movie.Year + "</td>" +
+                        "<td>" + movie.Type + "</td>" +
+                        "<td><img src=" + imagen + "></td" +
+                        "</tr>";
+                });
+                document.getElementById("tableDetallesPeliculas").innerHTML = detalles;
+            }
+        };
+        xmlhttp.open("GET", "https://www.omdbapi.com/?apikey=2a0107e8=" + titulo + "&plot=full&page=" + numPaginaAct, true);
+        xmlhttp.send();
+    }
+}
