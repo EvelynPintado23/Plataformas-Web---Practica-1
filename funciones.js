@@ -175,5 +175,14 @@ function cerrarPopup() {
     popup.classList.remove('active');
 }
 
+function siguientePagina() {
+    numPagina = numPagina + 1;
+    console.log(numPagina);
+    paginar(numPagina);
+}
 
-
+function anteriorPagina() {
+    //  console.log(numPagina);
+    numPagina = numPagina - 1;
+    paginar(numPagina);
+}
