@@ -28,22 +28,42 @@
             </form>
         </div>
        
+        <div class="ui main text container segment" id="buscarPaginas">
+            <label  class="resultadosPaginas" for="">Total Resultados</label>
+            <label class="resutadosPP" for="" id="totalResults">0</label><br>
+            <label class="resultadosPaginas" for="">Pag #: </label>
+            <label class="resutadosPP" id="numPagAct" for="">---</label>
+            <label class="resultadosPaginas" for="">Total Paginas: </label>
+            <label class="resutadosPP" id="totalPaginasMost" for="">---</label><br>
+            <input type="button" name="" id="irPagina" value="Ir" onclick="irPagina()">
+            <input id="numPagBusc" type="text" placeholder="Inserte # pagina...">
+        </div>
         
-        
-        
-        
-        <input type="button" id="nombreMovie" name="movieName" autocomplete="off" autofocus>
-        <table id="tablaDatosPeliculas" class="data">
-            <thead>
+        <div class="ui main text container segment" id="resultados">
+            <table id="tableDatosPeliculas" class="data">
+              <thead>
                 <tr>
-                    <th>Portada</th>
-                    <th>Titulo</th>
-                    <th>Año</th>
-                    <th>ID</th>
-                    <th>Detalles</th>
+                  <th class="titulos">Detalles</th>
+                  <th class="titulos">Titulo</th>
+                  <th class="titulos">Año</th>
+                  <th class="titulos">Tipo</th>
+                  <th class="titulos">Portada</th>
                 </tr>
-            </thead>
-            <tbody id="tablaDetallesPeliculas"></tbody>
-        </table>
+              </thead>
+              <tbody id="tablaDetallesPeliculas"></tbody>
+            </table>
+            <br>
+            <br>
+            <br>
+            <input class="btn-borde" id="atrasbtn" type="button" value="<< Atras" onclick="anteriorPagina()" >
+            <input class="btn-borde" id="siguientebtn" type="button" value="Siguiente >>" onclick="siguientePagina()" >
+            <br>
+            <br>
+            <br>
+            <label class="resultadosPaginas" for="">Pag #: </label>
+            <label class="resutadosPP" id="numPagActPie" for="">---</label>
+            <label class="resultadosPaginas" for="">Total Paginas: </label>
+            <label class="resutadosPP" id="totalPaginasMostPie" for="">---</label><br>
+        </div>
     </body>
 </html>
