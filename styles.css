@@ -1,0 +1,155 @@
+#nombreMovie{
+    width: 350px;
+
+}
+
+.form-control{
+    width: 30px;
+}
+
+img{
+    width: 100px;
+    height: 150px;
+}
+
+#scroll{
+    border:1px solid;
+    height:155px;
+    width:350px;
+    margin: 10px 140px 1px 0.5px;
+    text-align: center;
+    overflow-y:scroll;
+    overflow-x:hidden;
+  }
+  
+  
+  #scroll::-webkit-scrollbar-track
+  {
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+      background-color: #F5F5F5;
+      border-radius: 10px;
+  }
+  
+  #scroll::-webkit-scrollbar
+  {
+      width: 10px;
+      background-color: #F5F5F5;
+  }
+  
+  #scroll::-webkit-scrollbar-thumb
+  {
+      background-color: rgb(28, 28, 29,0.6);
+      border-radius: 10px;
+  
+  }
+  
+  .titulosDetalles{
+      color: rgb(176, 196, 222);
+  }
+
+
+  .overlay {  
+    
+    position: fixed; 
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+     visibility: hidden;   
+}
+.overlay.active {
+    visibility: visible;
+}
+
+.card-img-top{
+    height: 320px;
+    width:300px;
+}
+
+
+
+    
+.card {
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+    border-radius: 3px;
+    font-family: 'Montserrat', sans-serif;
+    padding: 20px;
+    text-align: center;
+    transition: .4s ease all;
+    transform: scale(0.7);
+    opacity: 0;
+    }
+    
+    .card .btn-cerrar-popup {
+    font-size: 16px;
+    line-height: 16px;
+    display: block;
+    text-align: left;
+    transition: .3s ease all;
+    color:black;
+    width: 2px;
+    border-color: #FEFFFF;
+    background-color: #FEFFFF;
+    } 
+    
+    .card .btn-cerrar-popup:hover {
+    color: rgba(0,0,0,0.3);
+
+    } 
+    
+    .card h1 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    opacity: 0;
+    
+    }
+    .card h3 {
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        opacity: 0;
+    }
+    
+    p { display:inline; }
+    
+    p{
+      opacity: 0;
+      
+    } 
+    
+    
+    
+    
+    .card.active {opacity: 1; transform: scale(1);}
+    .card.active h1 { animation: entradaTitulo .8s ease .5s forwards; }
+    .card.active h3 { animation: entradaSubtitulo .8s ease .5s forwards; }
+    .card.active p { animation: entradaSubtitulo .8s ease .5s forwards; }
+    
+    @keyframes entradaTitulo {
+    from {
+      opacity: 0;
+      transform: translateY(-25px);
+    }
+    
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    }
+    
+    @keyframes entradaSubtitulo {
+        from {
+            opacity: 0;
+            transform: translateY(25px);
+        }
+    
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+  
