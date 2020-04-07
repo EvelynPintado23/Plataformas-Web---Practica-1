@@ -1,109 +1,132 @@
 <!DOCTYPE html>
-<html lang = "es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Pagina Inicio</title>
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600|Open+Sans" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
-        <link rel="stylesheet" href="estilos.css">
-        <script type="text/javascript" src ="funcion.js"></script>
-    </head>
-    <body>
-        <div class = "ui main text container segment" id="container" >
-            <div class="ui huge header" id="TituloPagina">
-                Buscar Pelicula
-            </div>
-            <form class="ui huge form" action="/results">
-                <div class="field">
-                    <label id="Subtitulo">Nombre Pelicula</label>
-                    <div class="ui icon imput">
-                        <input type="text" id="nombreMovie" name="movieName" placeholder="Inserte el nombre de la pelicula..." autocomplete="off" autofocus>
-                        <i class="search icon"></i>
-                    </div>
+<html lang="es">
+
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pagina Inicio</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600|Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="funciones.js"></script>
+ </head>
+
+ <body>
+    <div class="jumbotron text-center" id="container">
+        <h1>Buscador de Peliculas Online</h1>
+        <br><br>
+        <form class="ui huge form" action="/results">
+            <div class="field">
+                <div class="ui icon imput">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-primary" onclick="listarPeliculas()" type="button">Buscar</button>
+                            </div>
+                            <input id="nombreMovie" type="text" class="form-control" placeholder="Ingresar nombre de la pelicula...">
+                        </div>
                 </div>
-                <input id="botonBuscar" type="button" value="Buscar" onclick="listarPeliculas()">
-            </form>
-        </div>
-       
-        <div class="ui main text container segment" id="buscarPaginas">
-            <label  class="resultadosPaginas" for="">Total Resultados</label>
-            <label class="resutadosPP" for="" id="totalResults">0</label><br>
-            <label class="resultadosPaginas" for="">Pag #: </label>
-            <label class="resutadosPP" id="numPagAct" for="">---</label>
-            <label class="resultadosPaginas" for="">Total Paginas: </label>
-            <label class="resutadosPP" id="totalPaginasMost" for="">---</label><br>
-            <input type="button" name="" id="irPagina" value="Ir" onclick="irPagina()">
-            <input id="numPagBusc" type="text" placeholder="Inserte # pagina...">
-        </div>
-        
-        <div class="ui main text container segment" id="resultados">
-            <table id="tableDatosPeliculas" class="data">
-              <thead>
+            </div>
+            <br>
+          
+        </form>
+    </div>
+
+    <div class="ui main text container segment" id="buscarPaginas">
+        <label class="resultadosPaginas" for="">Total Resultados</label>
+        <label class="resutadosPP" for="" id="totalResults">0</label><br>
+        <label class="resultadosPaginas" for="">Pag #: </label>
+        <label class="resutadosPP" id="numPagAct" for="">---</label>
+        <label class="resultadosPaginas" for="">Total Paginas: </label>
+        <label class="resutadosPP" id="totalPaginasMost" for="">---</label><br>
+        <input type="button" name="" id="irPagina" value="Ir" onclick="irPagina()">
+        <input id="numPagBusc" type="text" placeholder="Inserte # pagina...">
+
+
+    </div>
+
+    <div class="ui main text container segment" id="resultados">
+        <table id="tableDatosPeliculas" class="table">
+            <thead class="thead-dark">
                 <tr>
-                  <th class="titulos">Detalles</th>
-                  <th class="titulos">Titulo</th>
-                  <th class="titulos">Año</th>
-                  <th class="titulos">Tipo</th>
-                  <th class="titulos">Portada</th>
+                    <th class="titulos">Detalles</th>
+                    <th class="titulos">Titulo</th>
+                    <th class="titulos">Año</th>
+                    <th class="titulos">Tipo</th>
+                    <th class="titulos">Portada</th>
                 </tr>
-              </thead>
-              <tbody id="tablaDetallesPeliculas"></tbody>
-            </table>
-        </div>
-        <div class="overlay" id="overlay">
-            <div class="popup" id="popup">
-              <a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup" onclick="cerrarPopup()"><i
-                  class="fas fa-times"></i></a>
-              <h1 id="texto1"></h1>
-              <div id="portada">
-              </div>
-              <div id="scroll">
-                <p class="titulosDetalles">Año: <p id="anioM"></p>
-                </p><br>
-                <p class="titulosDetalles">Nominal: <p id="nomimaM"></p>
-                </p><br>
-                <p class="titulosDetalles">Estrenado: <p id="estrenoM"></p>
-                </p><br>
-                <p class="titulosDetalles">Duracion: <p id="duracionM"></p>
-                </p><br>
-                <p class="titulosDetalles">Genero: <p id="generoM"></p>
-                </p><br>
-                <p class="titulosDetalles">Director: <p id="directorM"></p>
-                </p><br>
-                <p class="titulosDetalles">Idimas: <p id="idiomaM"></p>
-                </p><br>
-                <p class="titulosDetalles">Pais: <p id="paisM"></p>
-                </p><br>
-                <p class="titulosDetalles">Actores: <p id="actoresM"></p>
-                </p><br>
-                <p class="titulosDetalles">Premios: <p id="premiosM"></p>
-                </p><br>
-                <p class="titulosDetalles">Escritores: <p id="escritorM"></p>
-                </p><br>
-                <p class="titulosDetalles">Resumen: <p id="resumenM"></p>
-                </p><br>
-                <p class="titulosDetalles">Ratings: <p id="Ratings"></p>
-                </p><br>
-                <p class="titulosDetalles">Metascore: <p id="Metascore"></p>
-                </p><br>
-                <p class="titulosDetalles">imdbRating: <p id="imdbRating"></p>
-                </p><br>
-                <p class="titulosDetalles">imdbVotes: <p id="imdbVotes"></p>
-                </p><br>
-                <p class="titulosDetalles">Type: <p id="Type"></p>
-                </p><br>
-                <p class="titulosDetalles">DVD: <p id="DVD"></p>
-                </p><br>
-                <p class="titulosDetalles">BoxOffice: <p id="BoxOffice"></p>
-                </p><br>
-                <p class="titulosDetalles">Production: <p id="Production"></p>
-                </p><br>
-                <p class="titulosDetalles">Website: <p id="Website"></p>
-                </p>
+            </thead>
+            <tbody id="tablaDetallesPeliculas"></tbody>
+        </table>
+    </div>
+
+    <div class="overlay" id="overlay">
+        <div class="card" id="card"  style="width:400px">
+            <button class="btn-cerrar-popup" onclick="cerrarPopup()">X</button>
+            <div  id="portada">
+            </div>
+            <div class="card-body">
+                <h4 class="card-title" id="texto1"></h4>
+                <div id="scroll">
+                    <p class="titulosDetalles">Año: <p id="anioM"></p>
+                    </p><br>
+                    <p class="titulosDetalles">Nominal: <p id="nomimaM"></p>
+                    </p><br>
+                    <p class="titulosDetalles">Estrenado: <p id="estrenoM"></p>
+                    </p><br>
+                    <p class="titulosDetalles">Duracion: <p id="duracionM"></p>
+                    </p><br>
+                    <p class="titulosDetalles">Genero: <p id="generoM"></p>
+                    </p><br>
+                    <p class="titulosDetalles">Director: <p id="directorM"></p>
+                    </p><br>
+                    <p class="titulosDetalles">Idimas: <p id="idiomaM"></p>
+                    </p><br>
+                    <p class="titulosDetalles">Pais: <p id="paisM"></p>
+                    </p><br>
+                    <p class="titulosDetalles">Actores: <p id="actoresM"></p>
+                    </p><br>
+                    <p class="titulosDetalles">Premios: <p id="premiosM"></p>
+                    </p><br>
+                    <p class="titulosDetalles">Escritores: <p id="escritorM"></p>
+                    </p><br>
+                    <p class="titulosDetalles">Resumen: <p id="resumenM"></p>
+                    </p><br>
+                    <p class="titulosDetalles">Ratings: <p id="Ratings"></p>
+                    </p><br>
+                    <p class="titulosDetalles">Metascore: <p id="Metascore"></p>
+                    </p><br>
+                    <p class="titulosDetalles">imdbRating: <p id="imdbRating"></p>
+                    </p><br>
+                    <p class="titulosDetalles">imdbVotes: <p id="imdbVotes"></p>
+                    </p><br>
+                    <p class="titulosDetalles">Type: <p id="Type"></p>
+                    </p><br>
+                    <p class="titulosDetalles">DVD: <p id="DVD"></p>
+                    </p><br>
+                    <p class="titulosDetalles">BoxOffice: <p id="BoxOffice"></p>
+                    </p><br>
+                    <p class="titulosDetalles">Production: <p id="Production"></p>
+                    </p><br>
+                    <p class="titulosDetalles">Website: <p id="Website"></p>
+                    </p>
+                </div>
             </div>
         </div>
-    </body>
+    
+    </div>
+
+
+
+
+ </body>
+
 </html>
