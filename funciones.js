@@ -32,13 +32,14 @@ function listarPeliculas(){
                 document.getElementById("totalResults").innerHTML = data.totalResults;
                 if (totalResult == 0){
                     document.getElementById("totalPaginasMost").innerHTML = 1;
-                    document.getElementById("totalPaginasMostPie").innerHTML = 1;
+                   // document.getElementById("totalPaginasMostPie").innerHTML = 1;
                 } else {
                     document.getElementById("totalPaginasMost").innerHTML = totalResult;
-                    document.getElementById("totalPaginasMostPie").innerHTML = totalResult;
+                   // document.getElementById("totalPaginasMostPie").innerHTML = totalResult;
                 }
-                desactivar();
+              //  desactivar();
                 // busca cada pelicula y nos detalla su informacion 
+                document.getElementById("numPagAct").innerHTML = numPagina;
                 data.Search.forEach(movie =>{
                     //validamos que exista imagen de portada
                     var imagen = movie.Poster;
@@ -58,56 +59,20 @@ function listarPeliculas(){
             }
         };
         // obtenemos los datos con la API de OmdB nuestra api es = 2a0107e8
-        xmlhttp.open("GET", "https://www.omdbapi.com/?apikey=2a0107e8=" + titulo + "&plot=full", true);
+        xmlhttp.open("GET", "https://www.omdbapi.com/?apikey=2a0107e8&s=" + titulo + "&plot=full", true);
         xmlhttp.send();
     }
 }
 
-function paginar(numPaginaAct) {
-    var titulo = document.getElementById("nombreMovie").value;
-    var detalles = "";
-    desactivar();
-    //con la variable numPagina controlamos la ubicacion de cada peliculaa
-    console.log(numPagina);
-    if (titulo == "") {
-        detalles = "<tr>" +
-            "<td colspan='5'>Ingresar informacion...</td>" +
-            "</tr>";
-        document.getElementById("tableDetallesPeliculas").innerHTML = detalles;
-    } else {
-        if (window.XMLHttpRequest) {
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                data = JSON.parse(this.responseText)
-                data.Search.forEach(movie => {
-                    var imagen = movie.Poster;
-                    if (imagen == "N/A") {
-                        imagen = "sinImagen.jpg";
-                    }
-                    detalles += "<tr>" +
-                        "<td><a href='#'  style='text-decoration:none'     onclick=\"buscarPorID('" + movie.imdbID + "')\">'<i class='fa fa-eye'></i>'</a>" +
-                        "<td>" + movie.Title + "</td>" +
-                        "<td>" + movie.Year + "</td>" +
-                        "<td>" + movie.Type + "</td>" +
-                        "<td><img src=" + imagen + "></td" +
-                        "</tr>";
-                });
-                document.getElementById("tableDetallesPeliculas").innerHTML = detalles;
-            }
-        };
-        xmlhttp.open("GET", "https://www.omdbapi.com/?apikey=2a0107e8=" + titulo + "&plot=full&page=" + numPaginaAct, true);
-        xmlhttp.send();
-    }
-}
 
 function irPagina() {
     var numPaginaAct = document.getElementById("numPagBusc").value;
     var titulo = document.getElementById("nombreMovie").value;
     var detalles = "";
+
+    
+
+
     if (numPaginaAct > totalResult) {
         detalles = "<tr>" +
             "<td colspan='5'>Numero de pagina fuera de limite..</td>" +
@@ -125,7 +90,8 @@ function irPagina() {
                 data = JSON.parse(this.responseText)
                 numPagina = 0;
                 numPagina = parseInt(numPaginaAct);
-                desactivar();
+              //  desactivar();
+              document.getElementById("numPagAct").innerHTML = numPagina;
                 data.Search.forEach(movie => {
                     var imagen = movie.Poster;
                     if (imagen == "N/A") {
@@ -139,10 +105,10 @@ function irPagina() {
                         "<td><img src=" + imagen + "></td" +
                         "</tr>";
                 });
-                document.getElementById("tableDetallesPeliculas").innerHTML = detalles;
+                document.getElementById("tablaDetallesPeliculas").innerHTML = detalles;
             }
         };
-        xmlhttp.open("GET", "https://www.omdbapi.com/?apikey=2a0107e8=" + titulo + "&plot=full&page=" + numPaginaAct, true);
+        xmlhttp.open("GET", "https://www.omdbapi.com/?apikey=2a0107e8&s=" + titulo + "&plot=full&page=" + numPaginaAct, true);
         xmlhttp.send();
     }
 }
@@ -154,7 +120,7 @@ function buscarPorID(id) {
         }
     });
     overlay = document.getElementById('overlay');
-    popup = document.getElementById('popup');
+    popup = document.getElementById('card');
     overlay.classList.add('active');
     popup.classList.add('active');
 }
@@ -169,45 +135,98 @@ function cerrarPopup() {
     document.getElementById("generoM").innerHTML = "";
     document.getElementById("directorM").innerHTML = "";
     document.getElementById("resumenM").innerHTML = "";
-    overlay = document.getElementById('overlay');
-    popup = document.getElementById('popup');
+   overlay = document.getElementById('overlay');
+   popup = document.getElementById('card');
     overlay.classList.remove('active');
     popup.classList.remove('active');
 }
 
-function siguientePagina() {
-    numPagina = numPagina + 1;
-    console.log(numPagina);
-    paginar(numPagina);
-}
 
-function anteriorPagina() {
-    //  console.log(numPagina);
-    numPagina = numPagina - 1;
-    paginar(numPagina);
-}
-
-function desactivar() {
-    var vacio = " ";
-    document.getElementById("numPagAct").innerHTML = vacio;
-    document.getElementById("numPagActPie").innerHTML = vacio;
-    var botonAtras = document.getElementById("atrasbtn");
-    var botonSiguiente = document.getElementById("siguientebtn");
-    document.getElementById("numPagAct").innerHTML = numPagina;
-    document.getElementById("numPagActPie").innerHTML = numPagina;
-    botonSiguiente.disabled = false;
-    if (numPagina == 1) {
-        botonAtras.disabled = true;
+function DataFullMuvies(idP) {
+    if (idP == "") {
+        detalles = "<tr>" +
+            "<td colspan='5'>No informacion disponible...</td>" +
+            "</tr>";
+        document.getElementById("tableDetallesPeliculas").innerHTML = detalles;
     } else {
-        botonAtras.disabled = false;
-    } 
-    if (numPagina < totalResult) {
-        botonSiguiente.disabled = false;
-    } else if (numPagina == totalResult) {
-        botonSiguiente.disabled = true;
+        if (window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                dataDetalles = JSON.parse(this.responseText)
+                var imagen = dataDetalles.Poster;
+                if (imagen == "N/A") {
+                    imagen = "sinImagen.jpg";
+                }
+
+                portada = "<img class='card-img-top'   src=" + imagen + ">";
+               // portada=imagen;
+                titulo = dataDetalles.Title;
+                anio = dataDetalles.Year;
+                nominal = dataDetalles.Rated;
+                duracion = dataDetalles.Runtime;
+                genero = dataDetalles.Genre;
+                estreno = dataDetalles.Released;
+                director = dataDetalles.Director;
+                resumen = dataDetalles.Plot;
+                idima = dataDetalles.Language;
+                pais = dataDetalles.Country;
+                actores = dataDetalles.Actors;
+                premios = dataDetalles.Awards;
+                escritores = dataDetalles.Writer;
+
+               //console.log(dataDetalles.Ratings[0].Source);
+                if(dataDetalles.Ratings.length>0){
+                    for (let index = 0; index < dataDetalles.Ratings.lenght; index++) {
+                        console.log(dataDetalles.Ratings[index].Source);
+                        Ratings += "<p>" + dataDetalles.Ratings[index].Source + "</p>"+"<p>" + dataDetalles.Ratings[index].Value + "</p>";
+                        
+                        
+                    }
+                }
+
+                Metascore = dataDetalles.Metascore;
+                imdbRating = dataDetalles.imdbRating;
+                imdbVotes = dataDetalles.imdbVotes;
+                Type = dataDetalles.Type;
+                DVD = dataDetalles.DVD;
+                BoxOffice = dataDetalles.BoxOffice;
+                Production = dataDetalles.Production;
+                Website = dataDetalles.Website;
+
+                document.getElementById("portada").innerHTML = portada;
+                document.getElementById("texto1").innerHTML = titulo;
+                document.getElementById("anioM").innerHTML = anio;
+                document.getElementById("nomimaM").innerHTML = nominal;
+                document.getElementById("estrenoM").innerHTML = estreno;
+                document.getElementById("duracionM").innerHTML = duracion;
+                document.getElementById("generoM").innerHTML = genero;
+                document.getElementById("directorM").innerHTML = director;
+                document.getElementById("resumenM").innerHTML = resumen;
+
+                document.getElementById("idiomaM").innerHTML = idima;
+                document.getElementById("paisM").innerHTML = pais;
+                document.getElementById("actoresM").innerHTML = actores;
+                document.getElementById("premiosM").innerHTML = premios;
+                document.getElementById("escritorM").innerHTML = escritores;
+
+                document.getElementById("Metascore").innerHTML = Metascore;
+                document.getElementById("imdbRating").innerHTML = imdbRating;
+                document.getElementById("imdbVotes").innerHTML = imdbVotes;
+                document.getElementById("Type").innerHTML = Type;
+                document.getElementById("DVD").innerHTML = DVD;
+                document.getElementById("BoxOffice").innerHTML = BoxOffice;
+                document.getElementById("Production").innerHTML = Production;
+                document.getElementById("Website").innerHTML = Website;
+                document.getElementById("Ratings").innerHTML = Ratings;
+            }
+        };
+        xmlhttp.open("GET", "https://www.omdbapi.com/?i=" + idP + "&apikey=e38ce2e0&s", true);
+        xmlhttp.send();
     }
-    if (totalResult == 0) {
-        botonSiguiente.disabled = true;
-        botonAtras.disabled = true;
-    }
+
 }
