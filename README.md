@@ -1,2 +1,2 @@
-# epintadoc-est.ups.edu.ec
+# Plataformas Web - Practica 1
 Plataformas Web - Practica 1
