@@ -123,7 +123,7 @@ Validamos que tenga portada la película y los datos no existentes.
 3.  **Subir al AVAC el informe del proyecto en formato \*.pdf. El informe debe
     contar con conclusiones apropiadas y la firma de cada estudiante.**
 
-4.  **Link del video en youtube: http://www.youtube.com/watch?v=UwPFjxjq_kU**
+4.  **Link del video en youtube: https://youtu.be/n_c-4rk3c4E**
 
 **CONCLUSIONES**:
 
